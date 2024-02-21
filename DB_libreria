@@ -73,3 +73,17 @@ SELECT
 FROM Libros
 INNER JOIN TiposLibros ON Libros.Tipo = TiposLibros.ID
 INNER JOIN PreciosPorTipoLibro ON TiposLibros.ID = PreciosPorTipoLibro.TipoLibroID;
+
+SELECT 
+  Libros.ID,
+  Libros.Titulo,
+  TiposLibros.Descripcion AS Tipo,
+  PreciosPorTipoLibro.Precio,
+  Cantidad * Precio AS ImporteBruto,
+  (Cantidad * Precio) * DescuentoPorcentaje AS MontoDescuento,
+  (Cantidad * Precio) - ((Cantidad * Precio) * DescuentoPorcentaje) AS PrecioFinal
+FROM Libros
+INNER JOIN TiposLibros ON Libros.Tipo = TiposLibros.ID
+INNER JOIN PreciosPorTipoLibro ON TiposLibros.ID = PreciosPorTipoLibro.TipoLibroID
+WHERE Libros.ID IN (1, 2, 3, 4); -- Lista de IDs de libros a calcular
+
